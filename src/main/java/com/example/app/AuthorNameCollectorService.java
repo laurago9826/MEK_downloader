@@ -19,7 +19,8 @@ public class AuthorNameCollectorService {
 				ResourceUtils.readInputStreamFromResources(AUTHORS_LIST_FILE))
 				.stream().filter(l ->
 				!l.startsWith("#") &&
-				!l.contains("költő") && !l.equals(""))
+				l.contains("író") &&
+				!l.equals(""))
 				.collect(Collectors.toList());
 		for (String l : lines) {
 			int idx = l.indexOf('(');

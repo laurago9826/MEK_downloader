@@ -28,7 +28,6 @@ public class BrowserSearchService {
 	private WebDriver driver;
 	
 	public List<Content> getAuthorContentInfo(String authorName) {
-//		authorName = "Kosztolányi Dezső";
 		List<Content> contentData = new ArrayList<>();
 		//search by author
 		driver.get(BASE_URL);

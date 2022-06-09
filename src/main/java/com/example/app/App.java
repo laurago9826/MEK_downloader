@@ -1,10 +1,7 @@
 package com.example.app;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.context.ApplicationContext;
@@ -12,8 +9,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import com.example.app.helpers.ResourceUtils;
 
 /**
  * Hello world!
@@ -27,16 +22,6 @@ public class App {
 	public static void main(String[] args) {
 		applicationContext = new AnnotationConfigApplicationContext(App.class);
 		applicationContext.getBean(DataExtractor.class).extractData();
-
-		try {
-			PDDocument doc = PDDocument
-					.load(ResourceUtils.readInputStreamFromResources(ResourceUtils.PDF_RESOURCE_DIR + "juhaszok1.pdf"));
-			PDFTextStripper pdfTextStripper = new PDFTextStripper();
-			String text = pdfTextStripper.getText(doc);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 
 	@Bean(destroyMethod = "quit")

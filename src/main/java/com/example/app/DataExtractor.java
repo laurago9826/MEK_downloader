@@ -16,7 +16,7 @@ public class DataExtractor {
 	
 	@Autowired
 	private BrowserSearchService downloaderService;
-	
+		
 	public void extractData() {
 		List<String> authors = authorNameCollector.getAuthorsList();
 		for (String author : authors) {
@@ -31,9 +31,11 @@ public class DataExtractor {
 		}
 		String fileName = ResourceUtils.EXTRACTED_TEXT_DIR
 				+ content.getAuthor() + "_" + content.getTitle() + ".txt";
-		String text = downloaderService.downloadHtmlContent(content.getHtmlUrl());
-		if (text != null && !text.equals("") && !isDrama(text)) {
-			ResourceUtils.writeTextToFile(fileName, filterLines(text));
+		if (!ResourceUtils.fileExists(fileName)) {
+			String text = downloaderService.downloadHtmlContent(content.getHtmlUrl());
+			if (text != null && !text.equals("") && !isDrama(text)) {
+				ResourceUtils.writeTextToFile(fileName, filterLines(text));
+			}
 		}
 	}
 	
